@@ -1,0 +1,11 @@
+machine:
+  php:
+    version: 5.4.5
+dependencies:
+  pre:
+    - sed -i 's/^;//' ~/.phpenv/versions/$(phpenv global)/etc/conf.d/xdebug.ini
+test:
+  pre:
+    - composer install --dev --no-progress
+  override:
+    - phpunit --coverage-text --configuration tests/circle/mysql.phpunit.xml # use PHPunit for testing
